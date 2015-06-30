@@ -1,0 +1,56 @@
+﻿@model VABEntLib6Playground.Models.UxModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <fieldset>
+        <legend>UxModel</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.NameForCompositeValidator)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.NameForCompositeValidator)
+            @Html.ValidationMessageFor(model => model.NameForCompositeValidator)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AnotherProp.AnotherName)
+        </div>
+        <div class="editor-field">
+            @Html.TextBoxFor(model => model.AnotherProp.AnotherName)
+            @Html.ValidationMessageFor(model => model.AnotherProp.AnotherName)
+        </div>
+        @for (var index = 0; index < Model.AnotherPropList.Count; index++)
+        { 
+            <div class="editor-label">
+                @Html.LabelFor(model => model.AnotherPropList[index].AnotherName)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(model => model.AnotherPropList[index].AnotherName)
+                @Html.ValidationMessageFor(model => model.AnotherPropList[index].AnotherName)
+            </div>
+        }
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
